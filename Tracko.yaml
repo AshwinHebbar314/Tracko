@@ -1,0 +1,245 @@
+_type: export
+__export_format: 4
+__export_date: 2022-03-21T21:12:19.836Z
+__export_source: insomnia.desktop.app:v2022.2.0
+resources:
+  - _id: req_wrk_29eda400705d4ab5b9fa224646fbf8b8f7c33b0e
+    parentId: wrk_29eda400705d4ab5b9fa224646fbf8b8
+    modified: 1647894045757
+    created: 1647894045757
+    url: "{{ base_url }}/api/trackers/{{ username }}"
+    name: /api/trackers/{username}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1647894045757
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_29eda400705d4ab5b9fa224646fbf8b8
+    parentId: null
+    modified: 1647881048330
+    created: 1647881048330
+    name: QSelf.yaml
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_wrk_29eda400705d4ab5b9fa224646fbf8b8a04fdc62
+    parentId: wrk_29eda400705d4ab5b9fa224646fbf8b8
+    modified: 1647894045755
+    created: 1647894045755
+    url: "{{ base_url }}/api/log/{{ trackerid }}"
+    name: /api/log/{trackerid}
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "value": "8",
+          "description": "Slept a lot today!"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1647894045755
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_29eda400705d4ab5b9fa224646fbf8b8f1027935
+    parentId: wrk_29eda400705d4ab5b9fa224646fbf8b8
+    modified: 1647894045753
+    created: 1647894045753
+    url: "{{ base_url }}/api/log/{{ trackerid }}"
+    name: /api/log/{trackerid}
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1647894045753
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_29eda400705d4ab5b9fa224646fbf8b83963a2d5
+    parentId: wrk_29eda400705d4ab5b9fa224646fbf8b8
+    modified: 1647894045748
+    created: 1647894045748
+    url: "{{ base_url }}/api/log/delete/{{ logid }}"
+    name: /api/log/delete/{logid}
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1647894045748
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_5e1604432fbfdb59e040a2049956fc905813f4ed
+    parentId: wrk_29eda400705d4ab5b9fa224646fbf8b8
+    modified: 1647881048343
+    created: 1647881048343
+    name: Base Environment
+    data:
+      base_url: "{{ scheme }}://{{ host }}{{ base_path }}"
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1647881048343
+    _type: environment
+  - _id: jar_5e1604432fbfdb59e040a2049956fc905813f4ed
+    parentId: wrk_29eda400705d4ab5b9fa224646fbf8b8
+    modified: 1647881048346
+    created: 1647881048346
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_856da331330641479229ca03b5044b19
+    parentId: wrk_29eda400705d4ab5b9fa224646fbf8b8
+    modified: 1647894305757
+    created: 1647881048333
+    fileName: QSelf.yaml
+    contents: |+
+      openapi: 3.0.0
+      info:
+        title: Tracko
+        contact:
+         email: "21f1003155@student.onlinedegree.iitm.ac.in"
+        description: API for Tracko
+        version: 1.0.0
+      servers:
+        - url: http://127.0.0.1:5000/
+        
+      paths:
+        /api/trackers/{username}:
+           get:
+            description: Operation to Read all trackers for that user
+            parameters:
+              - in: path
+                name: username
+                required: true
+                schema:
+                  type: string
+                  example: ash
+            responses:
+              '200':
+                description: Request Successful
+              '500':
+                description: Internal Server Error
+              '404':
+                description: User Not Found
+
+        /api/log/{trackerid}:
+          description: Operation to log to the tracker
+          post:
+            description: Add a log
+            parameters:
+              - in: path
+                name: trackerid
+                required: true
+                schema:
+                  type: string
+                  example: "30"
+            requestBody:
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      value:
+                        type: string
+                        example: "8"
+                      description:
+                        type: string
+                        example: Slept a lot today!
+            responses:
+              '201':
+                description: Successfully Logged
+              '500':
+                description: Internal Server Error
+              '400':
+                description: Bad Request
+       
+       
+          get:
+            description: Get all tracker logs for that tracker
+            parameters:
+              - in: path
+                name: trackerid
+                required: true
+                schema:
+                  type: string
+                  example: "29"
+            responses:
+              '200':
+                description: Request Successful
+              '500':
+                description: Internal Server Error
+              '404':
+                description: Tracker Not Found
+                
+        
+        /api/log/delete/{logid}:
+          description: Delete a log
+          delete:
+            description: Operation to delete the course resource
+            parameters:
+              - in: path
+                name: logid
+                required: true
+                schema:
+                  type: string
+                  example: "37"
+            responses:
+              '200':
+                description: Successfully Deleted
+              '500':
+                description: Internal Server Error
+              '404':
+                description: Log not found
+       
+
+    contentType: yaml
+    _type: api_spec
+  - _id: env_env_5e1604432fbfdb59e040a2049956fc905813f4ed_sub
+    parentId: env_5e1604432fbfdb59e040a2049956fc905813f4ed
+    modified: 1647894045760
+    created: 1647894045760
+    name: OpenAPI env
+    data:
+      scheme: http
+      base_path: ""
+      host: 127.0.0.1:5000
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1647894045760
+    _type: environment
